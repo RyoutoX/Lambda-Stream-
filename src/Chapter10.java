@@ -13,23 +13,18 @@ public class Chapter10 {
 		list.add(new Task(LocalDate.of(2021, 11, 9), "スクールの課題を解く", false));
 
 		// 以下記述
-		List<Task> mikanlist = new ArrayList<>();
-		//リストをすべて取り出す
-		for (Task mikanryou : list) {
-			// if文で未完了か識別する
-			if (mikanryou.isDone() == false) {
-				// 未完了だったら未完リストに追加
-				mikanlist.add(mikanryou);
-			}
-		}
-		System.out.println("未完了のタスクの個数は" + mikanlist.size());
+	
+	
+		//couta変数に代入
+		long couta = list.stream()
+		.filter(l -> l.isDone() == false)
+		.count();
+		
+		System.out.println("未完了のタスクの個数は" + couta);
 		System.out.println("【未完了のタスクを昇順に並び替えて一覧表示】");
 		
 		list.stream()
-		.filter(l -> l.isDone() == false)
 		.sorted(Comparator.comparing(l2 -> l2.getDate()))
 		.forEach(System.out::println);
-		
-
 	}
 }
